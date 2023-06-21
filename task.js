@@ -1,16 +1,14 @@
 const mysql = require('mysql2'); //using mysql2 so the autenthication module works. Didn't work with "normal" mysql
-//const bodyParser = require('body-parser');
-
 const express = require('express'),
       app = express(),
       bodyParser = require('body-parser');
-const port = 3306;
+const port = 1433;
 
 // Create a MySQL connection, connection string
 const db = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  password: '123',
+  password: '1234',
   database: 'databasetask',
 });
 
@@ -23,7 +21,7 @@ db.connect((err) => {
 });
 
 // Middleware
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 // Routes
 // Get HTTP Request
@@ -39,6 +37,8 @@ db.connect((err) => {
 app.get("/url", (req, res, next) => {
   res.json(["Tony","Lisa","Michael","Ginger","Food"]);
  });
+
+
 
 
 
@@ -93,5 +93,7 @@ app.delete('/users/:id', (req, res) => {
     res.json({ message: 'User deleted successfully' });
   });
 });
-
+app.listen(port, () => {
+  console.log("port is running");
+});
   console.log(`Server running on port ${port}`);

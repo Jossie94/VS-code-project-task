@@ -1,10 +1,9 @@
-const express = require('express');
 const mysql = require('mysql2'); //using mysql2 so the autenthication module works. Didn't work with "normal" mysql
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 
-
-
-const app = express();
+const express = require('express'),
+      app = express(),
+      bodyParser = require('body-parser');
 const port = 3306;
 
 // Create a MySQL connection, connection string
@@ -24,11 +23,11 @@ db.connect((err) => {
 });
 
 // Middleware
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 // Routes
 // Get HTTP Request
-app.get('/users', (req, res) => { // user endpoint
+ app.get('/users', (req, res) => { // user endpoint
   db.query('SELECT * FROM users', (err, results) => {
     if (err) {
       throw err;
@@ -36,6 +35,12 @@ app.get('/users', (req, res) => { // user endpoint
     res.json(results);
   });
 });
+
+app.get("/url", (req, res, next) => {
+  res.json(["Tony","Lisa","Michael","Ginger","Food"]);
+ });
+
+
 
 // Get a specific user with HTTP Get
 app.get('/users/:id', (req, res) => {
@@ -53,9 +58,6 @@ app.get('/users/:id', (req, res) => {
 });
 
 
-/*app.get('/ping', (req, res) => {
-  return {}
-});*/
 
 
 // Create a new user with HTTP Post

@@ -4,11 +4,11 @@ const express = require('express'),
       bodyParser = require('body-parser');
 const port = 1433;
 
-// Create a MySQL connection, connection string
+// Create a MySQL connection, connection string. Using MYsql default port
 const db = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  password: '1234',
+  password: '123',
   database: 'databasetask',
 });
 
@@ -34,13 +34,6 @@ app.use(bodyParser.json());
   });
 });
 
-app.get("/url", (req, res, next) => {
-  res.json(["Tony","Lisa","Michael","Ginger","Food"]);
- });
-
-
-
-
 
 // Get a specific user with HTTP Get
 app.get('/users/:id', (req, res) => {
@@ -56,8 +49,6 @@ app.get('/users/:id', (req, res) => {
     }
   });
 });
-
-
 
 
 // Create a new user with HTTP Post
@@ -94,6 +85,6 @@ app.delete('/users/:id', (req, res) => {
   });
 });
 app.listen(port, () => {
-  console.log("port is running");
-});
   console.log(`Server running on port ${port}`);
+});
+  
